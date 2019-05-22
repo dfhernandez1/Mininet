@@ -33,7 +33,7 @@ from pox.lib.recoco import Timer
 import time
 
 log = core.getLogger()
-tiempo_pedido = 5
+tiempo_pedido = 10
 
 # We don't want to flood immediately when a switch connects.
 # Can be overriden on commandline.
@@ -94,8 +94,8 @@ class LearningSwitch (object):
    #log.debug("Initializing LearningSwitch, transparent=%s",
    #          str(self.transparent))
 
-   Timer(tiempo_pedido, self. cambiarestado, recurring = False,):
-   inicial = 0
+   Timer(tiempo_pedido, self. cambiarestado, recurring = False)
+   self.inicial = 0
    #if: tiempo_pedido<iniciaL:
       
       
@@ -109,7 +109,7 @@ class LearningSwitch (object):
 
 
  def cambiarestado(self):
-   inicial=1
+   self.inicial=1
    print "cambiar estado"
 
 
@@ -126,11 +126,11 @@ class LearningSwitch (object):
        ip_packet = packet.payload
        ip_origen = ip_packet.srcip
        #guardamos la ip y la mac del paquete
-       if inicial=0:
+       if self.inicial==0:
           self.tabla_mac_ip[packet.src]=ip_origen
        else:
          ip_guardada = self.tabla_mac_ip[packet.src]
-         if ip_guardada ! ip_origen:
+         if ip_guardada != ip_origen:
           print "ataque"
 
        
